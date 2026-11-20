@@ -1,0 +1,35 @@
+plugins { id "com.android.application" }
+
+android {
+    namespace "io.github.bubbagum88.homemanager"
+    compileSdk 34
+    defaultConfig {
+        applicationId "io.github.bubbagum88.homemanager"
+        minSdk 29          // Quest 1 runs Android 10
+        targetSdk 29
+        versionCode 1
+        versionName "0.1"
+    }
+    signingConfigs {
+        // Fixed key kept in the repo so every CI build can `adb install -r`
+        // over the last one. Personal sideload key, not a store key.
+        fixed {
+            storeFile file("../signing/homemanager.jks")
+            storePassword "homemanager"
+            keyAlias "homemanager"
+            keyPassword "homemanager"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.fixed
+        }
+        debug { signingConfig signingConfigs.fixed }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets { main { assets.srcDirs = ["src/main/assets", "../catalog"] } }
+}

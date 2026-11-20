@@ -1,12 +1,17 @@
 # Quest1HomeManager
 
 A home environment manager for a **rooted Oculus Quest 1** (Horizon OS v50).
-Work in progress: only the catalog exists so far.
+Version 0.1, not yet tested on a headset.
 
-Planned:
-- List installed homes and apply one with a tap.
-- Auto-rotate: a random or next home at boot or on a timer.
-- A market that browses `catalog/catalog.json` and downloads and installs homes.
+- **Installed:** every installed home; tap one to apply it. "Use default home"
+  and "Random home now". Auto-rotate: off, at boot, or every 1 to 24 hours.
+- **Market:** searches `catalog/catalog.json`. Homes with a direct APK are
+  downloaded and installed as root; other links open in the browser.
+  "Update list" fetches the latest catalog from this repo's `main`.
+
+Needs root (Magisk will ask once). Build: GitHub Actions, artifact
+`Quest1HomeManager-N`. Install with `adb install -r Quest1HomeManager.apk`;
+every build is signed with the same key in `signing/`, so `-r` works.
 
 ## How the Quest picks its home (v50, checked on the headset)
 
